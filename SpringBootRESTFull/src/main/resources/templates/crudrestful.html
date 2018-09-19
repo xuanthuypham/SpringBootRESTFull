@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="" id="formid" method="POST" enctype="multipart/form-data">
+		<input type="number" name="id" id="idid"><br>
+		<input type="text" name="fullname" id="fullnameid"><br>
+		<input type="number" name="balance" id="balanceid"><br>
+			<input type="submit" value="Submit" id="submitid"/>
+	</form>
+
+	<script>
+		$(document).ready(function(){
+				$('#submitid').click(function(event){
+					event.preventDefault();
+					ajaxfunction();
+					});	
+			});
+		function ajaxfunction(){
+				$.ajax({
+						url: '/bankaccount',
+						type: 'POST',
+						enctype: 'multipart/form-data',
+						data: JSON.stringify({id : $('#idid').val(),fullName : $('#fullnameid').val(), balance: $('#balanceid').val()}),
+						processData: false,
+						contentType: 'application/json; charset=utf-8;',
+						dataType: 'json',
+						cache: false,
+						timeout: 1000000
+					});
+			}
+	</script>
+</body>
+</html>
